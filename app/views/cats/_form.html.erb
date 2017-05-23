@@ -1,0 +1,89 @@
+
+<% if action == :edit %>
+  <% action_url = cat_url(cat) %>
+<% else %>
+  <%action_url = cats_url %>
+<% end %>
+
+<h1><%= (action == :edit) ? "Edit Kitty!" : "Create Kitty!" %></h1>
+  <form action="<%=action_url%>" method="post">
+    <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+    <% end %>
+
+    <label for="name">Name</label>
+    <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+
+    <br>
+    <br>
+
+    <label for="sex">Sex</label>
+    <% if cat.sex == 'M' %>
+      Male<input type="radio" name="cat[sex]" value="M" checked="true">
+      Female<input type="radio" name="cat[sex]" value="F">
+    <% else %>
+      Male<input type="radio" name="cat[sex]" value="M">
+      Female<input type="radio" name="cat[sex]" value="F"  checked="true">
+    <% end %>
+
+
+    <br>
+    <br>
+
+    <label for="color">Color</label>
+    <select id="color" name="cat[color]">
+
+      <% if cat.color == 'Red' %>
+        <option value="Red" selected >Red </option>
+        <option value="Blue">Blue</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Green"> Green</option>
+
+      <% elsif cat.color == 'Blue' %>
+      <option value="Red">Red </option>
+      <option value="Blue" selected >Blue</option>
+      <option value="Yellow">Yellow</option>
+      <option value="Green"> Green</option>
+
+      <% elsif cat.color == 'Yellow' %>
+      <option value="Red">Red </option>
+      <option value="Blue">Blue</option>
+      <option value="Yellow" selected >Yellow</option>
+      <option value="Green"> Green</option>
+
+      <!-- <option value="Yellow" <%=# 'selected' if cat.color = 'Yellow' %> >Yellow</option> -->
+
+      <% elsif cat.color == 'Green' %>
+      <option value="Red">Red </option>
+      <option value="Blue">Blue</option>
+      <option value="Yellow">Yellow</option>
+      <option value="Green" selected > Green</option>
+
+      <% else %>
+      <option disabled="true" selected="true">--Select One--</option>
+      <option value="Red">Red </option>
+      <option value="Blue">Blue</option>
+      <option value="Yellow">Yellow</option>
+      <option value="Green" > Green</option>
+
+      <% end %>
+    </select>
+
+    <br>
+    <br>
+    <label for='birth_date'>Birth Date</label>
+    <input type='date' name='cat[birth_date]' value="<%=cat.birth_date%>">
+    <br>
+    <br>
+
+    <label>Description
+      <br>
+      <textarea name="cat[description]" cols="30" rows="10">
+        <%= cat.description %>
+      </textarea>
+    </label>
+
+    <br>
+
+    <input type="submit" value="<%= (action == :edit) ? "Update!" : "Regster!" %>">
+  </form>

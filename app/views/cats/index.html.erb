@@ -1,0 +1,15 @@
+<!-- @cat.each do |cat|
+render cat
+link    redirect_to cat_url(cat) -->
+
+<h2>Cats</h2>
+
+<ul>
+  <% @cats.each do |cat| %>
+    <li><%= cat.name %></li>
+    <a href="<%= cat_url(cat) %>">--See More--</a>
+    <br>
+    <br>
+    <br>
+  <% end %>
+</ul>
